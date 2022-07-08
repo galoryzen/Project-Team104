@@ -8,8 +8,8 @@ import pickle
 #from callbacks import register_callbacks
     
 # Dash instance declaration
-app = dash.Dash(__name__, plugins=[dl.plugins.pages], external_stylesheets=[dbc.themes.LUX],)
-
+dash_app = dash.Dash(__name__, plugins=[dl.plugins.pages], external_stylesheets=[dbc.themes.LUX],)
+app = dash_app.server
 
 #Top menu, items get from all pages registered with plugin.pages
 navbar = dbc.NavbarSimple([
@@ -24,7 +24,7 @@ navbar = dbc.NavbarSimple([
 )
 
 #Main layout
-app.layout = dbc.Container(
+dash_app.layout = dbc.Container(
     [
         navbar,
         dl.plugins.page_container,
@@ -42,6 +42,6 @@ app.layout = dbc.Container(
 
 # Testing server, don't use in production, host
 if __name__ == "__main__":
-    app.run_server(host='0.0.0.0', port=8050, debug=True)
+    dash_app.run_server(host='0.0.0.0', port=8050, debug=True)
     
     
